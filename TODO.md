@@ -1,10 +1,11 @@
 ### Todo
 
-- [ ] Write in TODO items
+- [ ] Configure root for relative
+- [ ] Read endpoints from .env file / env vars
 
 ### In Progress
 
-- [ ] Sample
+- [ ] Move over components, services, models etc for initial theme
 
 ### Done ✓
 
