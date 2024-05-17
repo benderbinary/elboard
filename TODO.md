@@ -1,19 +1,20 @@
 ### Todo
 
-- [ ] Implement fake backend and login (JWT) logic
 - [ ] Permission and Role based authorize
 - [ ] FormKit?
 - [ ] Socket/GraphQL/gRPC/tRPC
 
 ### In Progress
 
-- [ ] Route/implement table
-- [ ] Lazy load activity
+- [x] Implement fake backend and login (JWT) logic
 
 ### Done ✓
 
-- [x] Create TODO.md
-- [x] Import/configure Tailwind
-- [x] Move over components, services, models etc for initial theme
-- [x] Configure root for relative
-- [x] Read endpoints from .env file / env vars
+- [✓] Create TODO.md
+- [✓] Import/configure Tailwind
+- [✓] Move over components, services, models etc for initial theme
+- [✓] Configure root for relative
+- [✓] Read endpoints from .env file / env vars
+- [✓] Route/implement table
+- [✓] Lazy load activity
+- [✓] Loader component
