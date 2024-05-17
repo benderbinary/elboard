@@ -1,23 +1,21 @@
 <template>
   <div class="grid-container">
-    <HeaderView />
-    <SidebarView />
-    <MainContentView />
-    <FooterView />
+    <HeaderView class="header" />
+    <SidebarView class="sidebar" />
+    <router-view class="main" />
+    <FooterView class="footer" />
   </div>
 </template>
 
 <script>
 import HeaderView from './views/HeaderView.vue';
 import SidebarView from './views/SidebarView.vue';
-import MainContentView from './views/MainContentView.vue';
 import FooterView from './views/FooterView.vue';
 
 export default {
   components: {
     HeaderView,
     SidebarView,
-    MainContentView,
     FooterView
   }
 }
