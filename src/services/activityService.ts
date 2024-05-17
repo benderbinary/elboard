@@ -1,12 +1,11 @@
 import axios from "axios";
-import { ActivityInterface } from "@/models/ActivityInterface";
+import type { ActivityInterface } from "@/models/ActivityInterface";
 
-const API_BASE_URL = "https://www.boredapi.com/api";
+const BORED_API_BASE_URL = import.meta.env.BORED_API_BASE_URL
 
 export async function fetchActivity(): Promise<ActivityInterface | null> {
     try {
-        const response = await axios.get(`${API_BASE_URL}/activity`);
-        console.log("response ", response);
+        const response = await axios.get(`${BORED_API_BASE_URL}/activity`);
         return response.data as ActivityInterface;
     } catch (error) {
         console.error("Error fetching activity:", error);
