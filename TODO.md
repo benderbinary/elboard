@@ -1,8 +1,13 @@
 ### Todo
 
 - [ ] Permission and Role based authorize
+- [ ] Interfaces to types (objects AND primitives)
 - [ ] FormKit?
 - [ ] Socket/GraphQL/gRPC/tRPC
+- [ ] Quick search btn as in Tailwind doc
+- [ ] Check <https://tanstack.com/query/latest/docs/framework/vue/overview>
+- [ ] Check/cover setup store (pinia) - currently options
+- [ ] Play around with vanta.js or similar https://www.vantajs.com/?effect=halo
 
 ### In Progress
 

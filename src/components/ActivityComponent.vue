@@ -10,7 +10,6 @@
         <p>Price: {{ activity.price }}</p>
       </div>
     </div>
-    <!-- vue-cal integration -->
     <vue-cal :events="calendarEvents"></vue-cal>
   </div>
 </template>

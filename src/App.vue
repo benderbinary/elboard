@@ -1,24 +1,36 @@
 <template>
-  <div class="grid-container">
+  <div v-if="isLoggedIn" class="grid-container">
     <HeaderView class="header" />
     <SidebarView class="sidebar" />
     <router-view class="main" />
     <FooterView class="footer" />
   </div>
+  <div v-else>
+    <SignIn />
+  </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent, computed } from 'vue';
+import { useAuthStore } from './stores/authStore';
 import HeaderView from './views/HeaderView.vue';
 import SidebarView from './views/SidebarView.vue';
 import FooterView from './views/FooterView.vue';
+import SignIn from './components/SignIn.vue';
 
-export default {
+export default defineComponent({
   components: {
     HeaderView,
     SidebarView,
-    FooterView
-  }
-}
+    FooterView,
+    SignIn,
+  },
+  setup() {
+    const authStore = useAuthStore();
+    const isLoggedIn = computed(() => !!authStore.user);
+    return { isLoggedIn };
+  },
+});
 </script>
 
 <style lang="scss">
