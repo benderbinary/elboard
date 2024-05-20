@@ -1,21 +1,35 @@
 <template>
     <div class="relative flex min-h-screen items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-        <div class="absolute inset-0 bg-gradient-to-br from-pink-200 via-indigo-400 to-slate-700 opacity-90"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-orange-700 via-white to-indigo-700 opacity-60"></div>
         <div
-            class="absolute inset-0 text-slate-900/[0.17] [mask-image:linear-gradient(to_bottom_left,white,transparent,transparent)] transform -rotate-45">
+            class="absolute inset-0 text-slate-900/[0.09] [mask-image:linear-gradient(to_bottom_left,transparent,transparent,white)]">
             <svg class="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
                 <defs>
-                    <pattern id="grid-bg" width="32" height="32" patternUnits="userSpaceOnUse" x="100%"
-                        patternTransform="translate(0 -1)">
+                    <pattern id="grid-bg" width="32" height="32" patternUnits="userSpaceOnUse"
+                        patternTransform="rotate(-45)">
                         <path d="M0 32V.5H32" fill="none" stroke="currentColor"></path>
                     </pattern>
                 </defs>
                 <rect width="100%" height="100%" fill="url(#grid-bg)"></rect>
             </svg>
         </div>
-        <div class="relative z-10 w-full max-w-md space-y-8 bg-white p-8 rounded-lg shadow-lg">
+        <div class="relative z-10 w-full max-w-md space-y-8 p-8 rounded-lg bg-white shadow-md">
+            <transition name="slide-fade" mode="out-in">
+                <div v-if="loginError" key="alert" class="alert" role="alert">
+                    <strong class="font-bold">Holy smokes!</strong>
+                    <span class="block sm:inline">Something seriously bad happened.</span>
+                    <span class="close-btn" @click="closeAlert">
+                        <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20">
+                            <title>Close</title>
+                            <path
+                                d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+                        </svg>
+                    </span>
+                </div>
+            </transition>
             <div>
-                <h2 class="company-title">Your Company</h2>
+                <h2 class="company-title">Logo</h2>
                 <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Sign in to your account
                 </h2>
             </div>
@@ -43,7 +57,7 @@
                 </div>
                 <div>
                     <button type="submit"
-                        class="group relative flex w-full justify-center rounded-md border border-transparent bg-slate-600 py-2 px-4 text-sm font-medium text-white hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2">
+                        class="group relative flex w-full justify-center rounded-md border border-transparent bg-slate-600 py-2 px-4 text-sm font-medium text-white hover:bg-slate-700 focus:outline-none focus:ring-2 shadow-md focus:ring-slate-500 focus:ring-offset-2">
                         Sign in
                     </button>
                 </div>
@@ -68,20 +82,29 @@ export default defineComponent({
         const password = ref('');
         const authStore = useAuthStore();
         const router = useRouter();
+        const loginError = ref(false);
 
         const handleSubmit = async () => {
             try {
                 await authStore.login(username.value, password.value);
                 router.push('/dashboard');
+                loginError.value = false;
             } catch (error) {
                 console.error('Login failed:', error);
+                loginError.value = true;
             }
+        };
+
+        const closeAlert = () => {
+            loginError.value = false;
         };
 
         return {
             username,
             password,
             handleSubmit,
+            loginError,
+            closeAlert,
         };
     },
 });
@@ -104,6 +127,37 @@ export default defineComponent({
     font-weight: 700;
     text-align: center;
     color: #4F46E5;
-    /* Indigo 600 color */
+}
+
+.alert {
+    background-color: #FEF3C7;
+    /* Amber 100 */
+    border: 1px solid #FBBF24;
+    /* Amber 500 */
+    color: #92400E;
+    /* Amber 800 */
+    padding: 1rem;
+    border-radius: 0.375rem;
+    position: relative;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.close-btn {
+    cursor: pointer;
+}
+
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+    transition: all 0.5s ease;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+    transform: translateY(-20px);
+    opacity: 0;
 }
 </style>

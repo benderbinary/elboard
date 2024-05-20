@@ -7,11 +7,12 @@
 - [ ] Quick search btn as in Tailwind doc
 - [ ] Check <https://tanstack.com/query/latest/docs/framework/vue/overview>
 - [ ] Check/cover setup store (pinia) - currently options
-- [ ] Play around with vanta.js or similar https://www.vantajs.com/?effect=halo
+- [ ] Play around with vanta.js or similar <https://www.vantajs.com/?effect=halo>
+- [ ] i18n
 
 ### In Progress
 
-- [x] Implement fake backend and login (JWT) logic
+- [ ] Logout and ~unifty styling of existing components
 
 ### Done ✓
 
@@ -23,3 +24,5 @@
 - [✓] Route/implement table
 - [✓] Lazy load activity
 - [✓] Loader component
+- [✓] Implement fake backend and login (JWT) logic
+- [✓] Resolve refresh token issue

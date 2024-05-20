@@ -1,10 +1,8 @@
 export { fakeBackend };
 
-// array in local storage for users
 const usersKey = 'vue-3-jwt-refresh-token-users';
 const users: Array<User> = JSON.parse(localStorage.getItem(usersKey) || '[]');
 
-// add test user and save if users array is empty
 if (!users.length) {
     users.push({ id: 1, firstName: 'Test', lastName: 'User', username: 'test', password: 'test', refreshTokens: [] });
     localStorage.setItem(usersKey, JSON.stringify(users));
@@ -23,7 +21,6 @@ function fakeBackend() {
     const realFetch = window.fetch;
     window.fetch = function (input: RequestInfo | URL, init?: RequestInit): Promise<Response> {
         return new Promise((resolve, reject) => {
-            // wrap in timeout to simulate server api call
             setTimeout(handleRoute, 500);
 
             function handleRoute() {
@@ -38,24 +35,24 @@ function fakeBackend() {
                         return revokeToken();
                     case url.endsWith('/users') && method === 'GET':
                         return getUsers();
+                    case method === 'OPTIONS':
+                        return preflight();
                     default:
-                        // pass through any requests not handled above
                         return realFetch(input, init)
                             .then(response => resolve(response))
                             .catch(error => reject(error));
                 }
             }
 
-            // route functions
-
             function authenticate() {
                 const { username, password } = body() as { username: string; password: string };
                 const user = users.find(x => x.username === username && x.password === password);
 
-                if (!user) return error('Username or password is incorrect');
-
-                // add refresh token to user
+                if (!user) {
+                    return error('Username or password is incorrect');
+                }
                 user.refreshTokens.push(generateRefreshToken());
+
                 localStorage.setItem(usersKey, JSON.stringify(users));
 
                 return ok({
@@ -75,8 +72,6 @@ function fakeBackend() {
                 const user = users.find(x => x.refreshTokens.includes(refreshToken));
 
                 if (!user) return unauthorized();
-
-                // replace old refresh token with a new one and save
                 user.refreshTokens = user.refreshTokens.filter(x => x !== refreshToken);
                 user.refreshTokens.push(generateRefreshToken());
                 localStorage.setItem(usersKey, JSON.stringify(users));
@@ -95,8 +90,6 @@ function fakeBackend() {
 
                 const refreshToken = getRefreshToken();
                 const user = users.find(x => x.refreshTokens.includes(refreshToken));
-
-                // revoke token and save
                 if (user) {
                     user.refreshTokens = user.refreshTokens.filter(x => x !== refreshToken);
                     localStorage.setItem(usersKey, JSON.stringify(users));
@@ -113,15 +106,39 @@ function fakeBackend() {
             // helper functions
 
             function ok(body: any) {
-                resolve(new Response(JSON.stringify(body), { status: 200 }));
+                resolve(new Response(JSON.stringify(body), {
+                    status: 200,
+                    headers: corsHeaders()
+                }));
             }
 
             function unauthorized() {
-                resolve(new Response(JSON.stringify({ message: 'Unauthorized' }), { status: 401 }));
+                resolve(new Response(JSON.stringify({ message: 'Unauthorized' }), {
+                    status: 401,
+                    headers: corsHeaders()
+                }));
             }
 
             function error(message: string) {
-                resolve(new Response(JSON.stringify({ message }), { status: 400 }));
+                resolve(new Response(JSON.stringify({ message }), {
+                    status: 400,
+                    headers: corsHeaders()
+                }));
+            }
+
+            function preflight() {
+                resolve(new Response(null, {
+                    status: 204,
+                    headers: corsHeaders()
+                }));
+            }
+
+            function corsHeaders() {
+                return {
+                    'Access-Control-Allow-Origin': 'http://localhost:4000',
+                    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+                };
             }
 
             function isLoggedIn() {

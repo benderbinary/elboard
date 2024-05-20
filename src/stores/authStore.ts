@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import { fetchWrapper } from '@/helpers/fetch-wrapper';
 import router from '@/router/index';
 
-const baseUrl = import.meta.env.VITE_BORED_API_BASE_URL;
+const baseUrl = import.meta.env.VITE_FAKE_LOGIN_API_URL;
 
 interface User {
     jwtToken: string;
@@ -23,17 +23,17 @@ export const useAuthStore = defineStore({
     actions: {
         async login(username: string, password: string) {
             console.log('baseUrl ', baseUrl);
-            this.user = await fetchWrapper.post(`${baseUrl}/authenticate`, { username, password }, { credentials: 'include' });
+            this.user = await fetchWrapper.post(`${baseUrl}/users/authenticate`, { username, password }, { credentials: 'include' });
             this.startRefreshTokenTimer();
         },
         logout() {
-            fetchWrapper.post(`${baseUrl}/revoke-token`, {}, { credentials: 'include' });
+            fetchWrapper.post(`${baseUrl}/users/revoke-token`, {}, { credentials: 'include' });
             this.stopRefreshTokenTimer();
             this.user = null;
             router.push('/login');
         },
         async refreshToken() {
-            this.user = await fetchWrapper.post(`${baseUrl}/refresh-token`, {}, { credentials: 'include' });
+            this.user = await fetchWrapper.post(`${baseUrl}/users/refresh-token`, {}, { credentials: 'include' });
             this.startRefreshTokenTimer();
         },
         startRefreshTokenTimer() {
