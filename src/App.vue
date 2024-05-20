@@ -59,12 +59,4 @@ export default defineComponent({
   grid-area: footer;
   background-color: whitesmoke;
 }
-
-.sidebar {
-  grid-area: aside;
-  position: static;
-  width: 100%;
-  height: 100vh;
-  overflow-y: auto;
-}
 </style>

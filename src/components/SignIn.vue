@@ -13,19 +13,36 @@
                 <rect width="100%" height="100%" fill="url(#grid-bg)"></rect>
             </svg>
         </div>
-        <div class="relative z-10 w-full max-w-md space-y-8 p-8 rounded-lg bg-white shadow-md">
+        <div class="relative z-10 w-full max-w-md space-y-8 p-8 rounded-lg">
             <transition name="slide-fade" mode="out-in">
-                <div v-if="loginError" key="alert" class="alert" role="alert">
-                    <strong class="font-bold">Holy smokes!</strong>
-                    <span class="block sm:inline">Something seriously bad happened.</span>
-                    <span class="close-btn" @click="closeAlert">
-                        <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20">
-                            <title>Close</title>
+                <div v-if="loginError" key="alert"
+                    class="absolute top-8 left-1/2 transform -translate-x-1/2 w-full max-w-md alert" role="alert"
+                    @click="closeAlert">
+                    <div id="alert-2"
+                        class="flex items-center p-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                        role="alert">
+                        <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor" viewBox="0 0 20 20">
                             <path
-                                d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+                                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
                         </svg>
-                    </span>
+                        <span class="sr-only">Info</span>
+                        <div class="ms-3 text-sm font-medium">
+                            A simple info alert with an <a href="#"
+                                class="font-semibold underline hover:no-underline">example
+                                link</a>. Give it a click if you like.
+                        </div>
+                        <button type="button"
+                            class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"
+                            data-dismiss-target="#alert-2" aria-label="Close">
+                            <span class="sr-only">Close</span>
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </transition>
             <div>
@@ -127,23 +144,7 @@ export default defineComponent({
     font-weight: 700;
     text-align: center;
     color: #4F46E5;
-}
-
-.alert {
-    background-color: #FEF3C7;
-    /* Amber 100 */
-    border: 1px solid #FBBF24;
-    /* Amber 500 */
-    color: #92400E;
-    /* Amber 800 */
-    padding: 1rem;
-    border-radius: 0.375rem;
-    position: relative;
-    margin-bottom: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    /* Indigo 600 color */
 }
 
 .close-btn {
@@ -159,5 +160,9 @@ export default defineComponent({
 .slide-fade-leave-to {
     transform: translateY(-20px);
     opacity: 0;
+}
+
+.alert {
+    z-index: 20;
 }
 </style>
