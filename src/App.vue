@@ -13,6 +13,7 @@ import { defineComponent, computed } from 'vue';
 import { useAuthStore } from './stores/authStore';
 import SidebarView from './views/SidebarView.vue';
 import SignIn from './components/SignIn.vue';
+import './assets/base.css'
 
 export default defineComponent({
   components: {
