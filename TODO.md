@@ -9,10 +9,12 @@
 - [ ] Check/cover setup store (pinia) - currently options
 - [ ] Play around with vanta.js or similar <https://www.vantajs.com/?effect=halo>
 - [ ] i18n
+- [ ] xstate.js
 
 ### In Progress
 
-- [ ] Logout and ~unifty styling of existing components
+- [ ] Separate concerns for SignIn
+- [ ] Move
 
 ### Done ✓
 
@@ -26,3 +28,7 @@
 - [✓] Loader component
 - [✓] Implement fake backend and login (JWT) logic
 - [✓] Resolve refresh token issue
+
+### Semi-Done ~
+
+- [~] Logout and ~unifty styling of existing components
