@@ -71,22 +71,35 @@
         </router-link>
       </li>
       <li>
-        <router-link to="/logout"
+        <div @click="handleLogout"
           class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
           <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400">
             <i class="bx bx-log-out"></i>
           </span>
           <span class="text-sm font-medium">Logout</span>
-        </router-link>
+        </div>
       </li>
     </ul>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'SidebarView'
-}
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { useAuthStore } from '../stores/authStore'
+export default defineComponent({
+  name: 'SidebarView',
+  setup() {
+    const authStore = useAuthStore();
+
+    const handleLogout = () => {
+      authStore.logout()
+    }
+
+    return {
+      handleLogout
+    }
+  }
+})
 </script>
 
 <style scoped></style>

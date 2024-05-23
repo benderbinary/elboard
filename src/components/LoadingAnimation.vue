@@ -1,19 +1,22 @@
 <template>
-    <div class="relative flex justify-center items-center h-screen">
-        <div class="stack relative">
-            <div class="blobs">
-                <span class="blob"></span>
-                <span class="blob"></span>
-                <span class="blob"></span>
-                <span class="blob"></span>
-            </div>
-            <div class="absolute inset-0 flex justify-center items-center">
-                <span class="text-white text-4xl font-bold">Loading</span>
-            </div>
+    <div class="stack relative flex items-center justify-center h-screen">
+        <div class="blobs">
+            <span class="blob"></span>
+            <span class="blob"></span>
+            <span class="blob"></span>
+            <span class="blob"></span>
+        </div>
+        <div class="absolute inset-0 flex justify-center items-center space-x-1">
+            <span class="text-white text-4xl font-bold blob-color-1">L</span>
+            <span class="text-white text-4xl font-bold blob-color-2">o</span>
+            <span class="text-white text-4xl font-bold blob-color-3">a</span>
+            <span class="text-white text-4xl font-bold blob-color-4">d</span>
+            <span class="text-white text-4xl font-bold blob-color-1">i</span>
+            <span class="text-white text-4xl font-bold blob-color-2">n</span>
+            <span class="text-white text-4xl font-bold blob-color-3">g</span>
         </div>
     </div>
 </template>
-
 
 <script>
 export default {
@@ -35,11 +38,9 @@ export default {
     grid-area: stack;
 }
 
-.blob--filtered {}
-
 .blob {
     --border-radius: 115% 140% 145% 110% / 125% 140% 110% 125%;
-    --border-width: 5vmin;
+    --border-width: 2vmin;
 
     aspect-ratio: 1;
     display: block;
@@ -49,13 +50,11 @@ export default {
     background-position: center;
     border: var(--border-width) solid transparent;
     border-radius: var(--border-radius, 50%);
-    mask-image:
-        linear-gradient(transparent, transparent),
-        linear-gradient(black, white);
+    mask-image: linear-gradient(transparent, transparent), linear-gradient(black, white);
     mask-clip: padding-box, border-box;
     mask-composite: intersect;
     mix-blend-mode: screen;
-    height: 80vmin;
+    height: 20vmin;
     filter: blur(1vmin);
 }
 
@@ -85,6 +84,22 @@ export default {
     background-image: linear-gradient(var(--purple), var(--maroon), var(--purple));
     rotate: 120deg;
     scale: 1.02;
+}
+
+.blob-color-1 {
+    color: var(--blue);
+}
+
+.blob-color-2 {
+    color: var(--red);
+}
+
+.blob-color-3 {
+    color: var(--olive);
+}
+
+.blob-color-4 {
+    color: var(--purple);
 }
 
 @keyframes spin {

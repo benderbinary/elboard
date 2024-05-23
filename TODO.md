@@ -10,11 +10,13 @@
 - [ ] Play around with vanta.js or similar <https://www.vantajs.com/?effect=halo>
 - [ ] i18n
 - [ ] xstate.js
+- [ ] vue-draggable-resizable homepage
+- [ ] <https://ui.aceternity.com/> - <https://ui.shadcn.com/>
 
 ### In Progress
 
 - [ ] Separate concerns for SignIn
-- [ ] Move
+- [ ] Logout
 
 ### Done ✓
 

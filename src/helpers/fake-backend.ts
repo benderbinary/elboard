@@ -21,7 +21,7 @@ function fakeBackend() {
     const realFetch = window.fetch;
     window.fetch = function (input: RequestInfo | URL, init?: RequestInit): Promise<Response> {
         return new Promise((resolve, reject) => {
-            setTimeout(handleRoute, 500);
+            setTimeout(handleRoute, 3500); // Loading timeout
 
             function handleRoute() {
                 const { method } = init || {};
