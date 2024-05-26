@@ -55,9 +55,12 @@ export default defineComponent({
         content: ''
       }
     ]);
+    const isBoredApiAvailable = ref<Boolean>(false)
 
     async function fetchActivity() {
-      await store.fetchActivityAction();
+      let fetchResponse = await store.fetchActivityAction();
+      console.log('fetchResponse ', fetchResponse);
+      return fetchResponse
     }
 
     watch(

@@ -9,9 +9,8 @@ export const activityStore = defineStore("activity", {
     actions: {
         async fetchActivityAction() {
             const result = await fetchActivity();
-            if (result) {
-                this.activity = result;
-            }
+            console.log('result in fetchActivityAction ', result);
+            result ? this.activity = result : this.activity = null;
         },
     },
 });

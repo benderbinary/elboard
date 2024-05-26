@@ -21,7 +21,7 @@ function fakeBackend() {
     const realFetch = window.fetch;
     window.fetch = function (input: RequestInfo | URL, init?: RequestInit): Promise<Response> {
         return new Promise((resolve, reject) => {
-            setTimeout(handleRoute, 3500); // Loading timeout
+            setTimeout(handleRoute, 1500); // Loading timeout
 
             function handleRoute() {
                 const { method } = init || {};
@@ -103,8 +103,6 @@ function fakeBackend() {
                 return ok(users);
             }
 
-            // helper functions
-
             function ok(body: any) {
                 resolve(new Response(JSON.stringify(body), {
                     status: 200,
@@ -148,7 +146,6 @@ function fakeBackend() {
                     : (init?.headers as Record<string, string | undefined>)?.['Authorization'] || '';
                 if (!authHeader?.startsWith('Bearer fake-jwt-token')) return false;
 
-                // check if token is expired
                 try {
                     const jwtToken = JSON.parse(atob(authHeader.split('.')[1]));
                     const tokenExpired = Date.now() > (jwtToken.exp * 1000);
@@ -163,15 +160,12 @@ function fakeBackend() {
             }
 
             function generateJwtToken() {
-                // create token that expires in 15 minutes
                 const tokenPayload = { exp: Math.round(new Date(Date.now() + 15 * 60 * 1000).getTime() / 1000) };
                 return `fake-jwt-token.${btoa(JSON.stringify(tokenPayload))}`;
             }
 
             function generateRefreshToken() {
                 const token = new Date().getTime().toString();
-
-                // add token cookie that expires in 7 days
                 const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toUTCString();
                 document.cookie = `fakeRefreshToken=${token}; expires=${expires}; path=/`;
 
@@ -179,7 +173,6 @@ function fakeBackend() {
             }
 
             function getRefreshToken() {
-                // get refresh token from cookie
                 return (document.cookie.split(';').find(x => x.includes('fakeRefreshToken')) || '=').split('=')[1];
             }
         });
