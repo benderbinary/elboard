@@ -10,13 +10,12 @@
 - [ ] Play around with vanta.js or similar <https://www.vantajs.com/?effect=halo>
 - [ ] i18n
 - [ ] xstate.js
-- [ ] vue-draggable-resizable homepage
 - [ ] <https://ui.aceternity.com/> - <https://ui.shadcn.com/>
+- [ ] Logout are you sure modal
+- [ ] Active element in navigation
+- [ ] List
 
 ### In Progress
-
-- [ ] Separate concerns for SignIn
-- [ ] Logout
 
 ### Done ✓
 
@@ -28,9 +27,11 @@
 - [✓] Route/implement table
 - [✓] Lazy load activity
 - [✓] Loader component
+- [~] Logout and ~unifty styling of existing components
 - [✓] Implement fake backend and login (JWT) logic
 - [✓] Resolve refresh token issue
+- [✓] Separate concerns for SignIn
+- [✓] Logout
+- [✓] vue-draggable-resizable homepage
 
 ### Semi-Done ~
-
-- [~] Logout and ~unifty styling of existing components

@@ -4,7 +4,9 @@ import App from './App.vue';
 import router from './router';
 import { useAuthStore } from './stores/authStore';
 import { fakeBackend } from './helpers/fake-backend';
-import './index.css'
+import VueDraggableResizable from 'vue-draggable-resizable';
+import './assets/vue-draggable-resizable.css';
+import './index.css';
 
 fakeBackend();
 startApp();
@@ -14,6 +16,8 @@ async function startApp() {
 
     app.use(createPinia());
     app.use(router);
+
+    app.component('vue-draggable-resizable', VueDraggableResizable);
 
     const authStore = useAuthStore();
     try {

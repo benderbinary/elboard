@@ -6,15 +6,6 @@
             <span class="blob"></span>
             <span class="blob"></span>
         </div>
-        <div class="absolute inset-0 flex justify-center items-center space-x-1">
-            <span class="text-white text-4xl font-bold blob-color-1">L</span>
-            <span class="text-white text-4xl font-bold blob-color-2">o</span>
-            <span class="text-white text-4xl font-bold blob-color-3">a</span>
-            <span class="text-white text-4xl font-bold blob-color-4">d</span>
-            <span class="text-white text-4xl font-bold blob-color-1">i</span>
-            <span class="text-white text-4xl font-bold blob-color-2">n</span>
-            <span class="text-white text-4xl font-bold blob-color-3">g</span>
-        </div>
     </div>
 </template>
 

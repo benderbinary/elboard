@@ -1,13 +1,13 @@
 <template>
     <div class="relative flex min-h-screen items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <background-pattern></background-pattern>
-        <transition name="fade">
-            <alert-component v-if="!isLoading" :show="loginError"></alert-component>
+        <transition name="fade" @after-enter="onTransitionEnd('alert')">
+            <alert-component v-if="!isLoading && loginError" :show="loginError"></alert-component>
         </transition>
-        <transition name="fade">
+        <transition name="fade" @after-enter="onTransitionEnd('loading')">
             <loading-animation v-if="isLoading"></loading-animation>
         </transition>
-        <transition name="fade">
+        <transition name="fade" @after-enter="onTransitionEnd('form')">
             <div v-if="!isLoading" class="relative z-10 w-full max-w-md space-y-8 p-8 rounded-lg">
                 <div>
                     <h2 class="company-title">Logo</h2>
@@ -76,6 +76,7 @@ export default defineComponent({
         const router = useRouter()
         const loginError = ref(false)
         const isLoading = ref(false)
+        const transitionQueue = ref<string[]>([])
 
         const handleSubmit = async () => {
             isLoading.value = true
@@ -95,13 +96,34 @@ export default defineComponent({
             loginError.value = false
         }
 
+        const onTransitionEnd = (transitionName: string) => {
+            const index = transitionQueue.value.indexOf(transitionName)
+            if (index > -1) {
+                transitionQueue.value.splice(index, 1)
+            }
+            if (transitionQueue.value.length > 0) {
+                // Start the next transition
+                transitionQueue.value.shift()
+            }
+        }
+
+        const startTransition = (transitionName: string) => {
+            transitionQueue.value.push(transitionName)
+            if (transitionQueue.value.length === 1) {
+                // If no other transition is ongoing, start the transition immediately
+                transitionQueue.value.shift()
+            }
+        }
+
         return {
             username,
             password,
             handleSubmit,
             loginError,
             closeAlert,
-            isLoading
+            isLoading,
+            onTransitionEnd,
+            startTransition
         }
     }
 })
@@ -131,9 +153,12 @@ export default defineComponent({
     cursor: pointer;
 }
 
-.fade-enter-active,
-.fade-leave-active {
+.fade-enter-active {
     transition: opacity 0.5s ease;
+}
+
+.fade-leave-active {
+    transition: opacity 0s ease;
 }
 
 .fade-enter-from,
