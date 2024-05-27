@@ -7,7 +7,7 @@ export const activityStore = defineStore("activity", {
         activity: null as ActivityInterface | null,
     }),
     actions: {
-        async fetchActivityAction() {
+        async fetchActivityAction(): Promise<void> {
             const result = await fetchActivity();
             console.log('result in fetchActivityAction ', result);
             result ? this.activity = result : this.activity = null;

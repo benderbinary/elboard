@@ -1,12 +1,18 @@
 <template>
     <div class="relative flex min-h-screen items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <background-pattern></background-pattern>
+
         <transition name="fade" @after-enter="onTransitionEnd('alert')">
-            <alert-component v-if="!isLoading && loginError" :show="loginError"></alert-component>
+            <alert-component v-if="!isLoading && loginError" :show="loginError" @close="loginError = false">
+                Login error!
+                <a href="#" class="font-semibold underline hover:no-underline">slot link to knowhere</a>
+            </alert-component>
         </transition>
+
         <transition name="fade" @after-enter="onTransitionEnd('loading')">
             <loading-animation v-if="isLoading"></loading-animation>
         </transition>
+
         <transition name="fade" @after-enter="onTransitionEnd('form')">
             <div v-if="!isLoading" class="relative z-10 w-full max-w-md space-y-8 p-8 rounded-lg">
                 <div>
@@ -15,6 +21,7 @@
                         Sign in to your account
                     </h2>
                 </div>
+
                 <form class="mt-8 space-y-6" @submit.prevent="handleSubmit">
                     <div class="rounded-md shadow-sm -space-y-px">
                         <div>
@@ -32,12 +39,14 @@
                                 placeholder="Password" />
                         </div>
                     </div>
+
                     <div class="flex items-center justify-between">
                         <div class="text-sm">
                             <a href="#" class="font-medium text-indigo-300 hover:text-indigo-200">Forgot your
                                 password?</a>
                         </div>
                     </div>
+
                     <div>
                         <button type="submit"
                             class="group relative flex w-full justify-center rounded-md border border-transparent bg-slate-600 py-2 px-4 text-sm font-medium text-white hover:bg-slate-700 focus:outline-none focus:ring-2 shadow-md focus:ring-slate-500 focus:ring-offset-2">
@@ -45,8 +54,9 @@
                         </button>
                     </div>
                 </form>
+
                 <p class="mt-2 text-center text-sm text-gray-600">
-                    Don't have an account?
+                    Maidenless? Wanna buy bad jokes?
                     <a href="#" class="font-medium text-indigo-300 hover:text-indigo-200">Get access</a>
                 </p>
             </div>
@@ -55,12 +65,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useAuthStore } from '../stores/authStore'
-import AlertComponent from './AlertComponent.vue'
-import BackgroundPattern from './BackgroundPattern.vue'
-import LoadingAnimation from './LoadingAnimation.vue'
+import { defineComponent, ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { useAuthStore } from '../stores/authStore';
+import AlertComponent from './AlertComponent.vue';
+import BackgroundPattern from './BackgroundPattern.vue';
+import LoadingAnimation from './LoadingAnimation.vue';
 
 export default defineComponent({
     components: {
@@ -70,50 +80,48 @@ export default defineComponent({
     },
     name: 'SignIn',
     setup() {
-        const username = ref('')
-        const password = ref('')
-        const authStore = useAuthStore()
-        const router = useRouter()
-        const loginError = ref(false)
-        const isLoading = ref(false)
-        const transitionQueue = ref<string[]>([])
+        const username = ref('');
+        const password = ref('');
+        const authStore = useAuthStore();
+        const router = useRouter();
+        const loginError = ref(false);
+        const isLoading = ref(false);
+        const transitionQueue = ref<string[]>([]);
 
         const handleSubmit = async () => {
-            isLoading.value = true
+            isLoading.value = true;
             try {
-                await authStore.login(username.value, password.value)
-                router.push('/dashboard')
-                loginError.value = false
+                await authStore.login(username.value, password.value);
+                router.push('/dashboard');
+                loginError.value = false;
             } catch (error) {
-                console.error('Login failed:', error)
-                loginError.value = true
+                console.error('login error ', error);
+                loginError.value = true;
             } finally {
-                isLoading.value = false
+                isLoading.value = false;
             }
-        }
+        };
 
         const closeAlert = () => {
-            loginError.value = false
-        }
+            loginError.value = false;
+        };
 
         const onTransitionEnd = (transitionName: string) => {
-            const index = transitionQueue.value.indexOf(transitionName)
+            const index = transitionQueue.value.indexOf(transitionName);
             if (index > -1) {
-                transitionQueue.value.splice(index, 1)
+                transitionQueue.value.splice(index, 1);
             }
             if (transitionQueue.value.length > 0) {
-                // Start the next transition
-                transitionQueue.value.shift()
+                transitionQueue.value.shift();
             }
-        }
+        };
 
         const startTransition = (transitionName: string) => {
-            transitionQueue.value.push(transitionName)
+            transitionQueue.value.push(transitionName);
             if (transitionQueue.value.length === 1) {
-                // If no other transition is ongoing, start the transition immediately
-                transitionQueue.value.shift()
+                transitionQueue.value.shift();
             }
-        }
+        };
 
         return {
             username,
@@ -124,9 +132,9 @@ export default defineComponent({
             isLoading,
             onTransitionEnd,
             startTransition
-        }
+        };
     }
-})
+});
 </script>
 
 <style scoped>
@@ -146,7 +154,6 @@ export default defineComponent({
     font-weight: 700;
     text-align: center;
     color: #4f46e5;
-    /* Indigo 600 color */
 }
 
 .close-btn {

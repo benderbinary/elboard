@@ -6,7 +6,6 @@
 - [ ] Socket/GraphQL/gRPC/tRPC
 - [ ] Quick search btn as in Tailwind doc
 - [ ] Check <https://tanstack.com/query/latest/docs/framework/vue/overview>
-- [ ] Check/cover setup store (pinia) - currently options
 - [ ] Play around with vanta.js or similar <https://www.vantajs.com/?effect=halo>
 - [ ] i18n
 - [ ] xstate.js
