@@ -16,7 +16,8 @@
 
 ### In Progress
 
-- [ ] Design patterns <https://dev-academy.com/vue-design-patterns/#builder-pattern>
+- [ ] Builder patterns / FormBuilder
+- [ ] Zod
 
 ### Done ✓
 
