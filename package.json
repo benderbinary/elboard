@@ -46,6 +46,7 @@
     "npm-run-all2": "^6.1.2",
     "postcss": "^8.4.38",
     "prettier": "^3.2.5",
+    "prettier-plugin-html-template-literals": "^1.0.5",
     "sass": "^1.77.1",
     "start-server-and-test": "^2.0.3",
     "tailwindcss": "^3.4.3",

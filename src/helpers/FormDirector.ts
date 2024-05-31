@@ -28,7 +28,7 @@ export function useFormDirector(builder: FormBuilder) {
             })
             .addField({
                 component: VInput,
-                name: "textInput2",
+                name: "textInp",
                 type: "text",
                 label: "username",
                 props: {

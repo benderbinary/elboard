@@ -1,30 +1,30 @@
 <template>
-    <input :name="props.name" :type="props.type" :value="inputValue" :checked="Boolean(inputValue)"
-        @input="onChangeHandler" />
+  <input :type="type" :value="modelValue" @input="updateValue" class="input-class" />
 </template>
 
-<script setup lang="ts">
-import { defineProps, defineEmits } from 'vue';
-import { useInput } from '../composables/useInput';
+<script lang="ts">
+import { defineComponent, type PropType } from 'vue'
 
-const props = defineProps({
-    type: {
-        default: null,
-        type: String,
-    },
+export default defineComponent({
+  name: 'VInput',
+  props: {
     modelValue: {
-        default: null,
-        type: [String, Boolean],
+      type: [String, Number, Boolean],
+      default: ''
     },
-    name: {
-        default: null,
-        type: String,
-    },
-});
-
-const emit = defineEmits(['update:modelValue']);
-
-const { inputValue, onChangeHandler } = useInput(props, emit);
+    type: {
+      type: String as PropType<'text' | 'password' | 'email'>,
+      default: 'text'
+    }
+  },
+  emits: ['update:modelValue'],
+  methods: {
+    updateValue(event: Event) {
+      const target = event.target as HTMLInputElement
+      this.$emit('update:modelValue', target.value)
+    }
+  }
+})
 </script>
 
 <style scoped></style>

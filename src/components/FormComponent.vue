@@ -1,7 +1,13 @@
 <template>
-  <div class="relative flex min-h-screen items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+  <div
+    class="relative flex min-h-screen items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8"
+  >
     <form @submit.prevent="submit" class="mt-8 space-y-6">
-      <div v-for="(field, index) in formFields" :key="field.name" class="rounded-md shadow-sm -space-y-px">
+      <div
+        v-for="(field, index) in formFields"
+        :key="field.name"
+        class="rounded-md shadow-sm -space-y-px"
+      >
         <div>
           <label :for="field.name" class="sr-only">{{ field.label }}</label>
           <component
@@ -9,7 +15,7 @@
             :is="field.component"
             :type="field.type"
             v-bind="field.attrs"
-            v-model="fieldValues[field.name]"
+            v-model="values[field.name]"
             class="relative block w-full appearance-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
           />
         </div>
@@ -19,7 +25,9 @@
       </div>
       <div class="flex items-center justify-between">
         <div class="text-sm">
-          <a href="#" class="font-medium text-indigo-300 hover:text-indigo-200">Forgot your password?</a>
+          <a href="#" class="font-medium text-indigo-300 hover:text-indigo-200"
+            >Forgot your password?</a
+          >
         </div>
       </div>
       <div>
@@ -37,9 +45,9 @@
     </form>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent, computed, markRaw, type PropType } from 'vue'
+  
+  <script lang="ts">
+import { defineComponent, computed, markRaw, ref, type PropType } from 'vue'
 import { useForm } from '../composables/useForm'
 import type { Field } from '../helpers/FormBuilder'
 
@@ -71,18 +79,26 @@ export default defineComponent({
       return fieldValuesObj
     })
 
+    const handleModelUpdate = (name: string) => {
+      return (value: string | boolean) => {
+        onChangeHandler(value, name)
+      }
+    }
+
     return {
       errors,
       submitable,
       formFields,
       submit,
-      fieldValues
+      handleModelUpdate,
+      fieldValues,
+      values // Ensure values is exposed
     }
   }
 })
 </script>
-
-<style scoped>
+  
+  <style scoped>
 .label {
   display: block;
   margin-bottom: 0.5rem;
@@ -104,3 +120,4 @@ export default defineComponent({
   border: 0;
 }
 </style>
+  

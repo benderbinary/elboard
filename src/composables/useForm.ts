@@ -12,7 +12,7 @@ export function useForm(fields: any[]) {
     });
 
     function onChangeHandler(value: string | boolean, name: string) {
-        console.log(`value ${value} and name ${name} in onChangeHandler`)
+        console.log(`value ${value} and name ${name} in onChangeHandler`);
         values[name] = value;
     }
 
