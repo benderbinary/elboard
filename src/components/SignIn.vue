@@ -82,10 +82,10 @@ export default defineComponent({
     setup() {
         const username = ref('');
         const password = ref('');
-        const authStore = useAuthStore();
-        const router = useRouter();
         const loginError = ref(false);
         const isLoading = ref(false);
+        const authStore = useAuthStore();
+        const router = useRouter();
         const transitionQueue = ref<string[]>([]);
 
         const handleSubmit = async () => {
@@ -126,10 +126,10 @@ export default defineComponent({
         return {
             username,
             password,
-            handleSubmit,
             loginError,
-            closeAlert,
             isLoading,
+            handleSubmit,
+            closeAlert,
             onTransitionEnd,
             startTransition
         };

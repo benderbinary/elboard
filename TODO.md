@@ -3,7 +3,7 @@
 - [ ] Permission and Role based authorize
 - [ ] Interfaces to types (objects AND primitives)
 - [ ] FormKit?
-- [ ] Socket/GraphQL/gRPC/tRPC
+- [ ] Socket/GraphQL/gRPC
 - [ ] Quick search btn as in Tailwind doc
 - [ ] Check <https://tanstack.com/query/latest/docs/framework/vue/overview>
 - [ ] Play around with vanta.js or similar <https://www.vantajs.com/?effect=halo>
@@ -13,6 +13,8 @@
 - [ ] Logout are you sure modal
 - [ ] Active element in navigation
 - [ ] List
+- [ ] tRPC TODO
+- [ ] fix relative/absolute path
 
 ### In Progress
 

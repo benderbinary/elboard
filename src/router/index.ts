@@ -4,6 +4,7 @@ import SignIn from '@/components/SignIn.vue';
 import MainContentView from '@/views/MainContentView.vue';
 import TableView from '@/views/TableView.vue';
 import AboutView from '@/views/AboutView.vue';
+import BuilderPatternView from '@/views/BuilderPatternView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,6 +29,11 @@ const router = createRouter({
       path: '/table',
       name: 'table',
       component: TableView
+    },
+    {
+      path: '/patterns/builder',
+      name: 'builder',
+      component: BuilderPatternView
     },
     {
       path: '/:pathMatch(.*)*',
