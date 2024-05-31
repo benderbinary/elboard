@@ -16,7 +16,10 @@ module.exports = {
         'cypress/support/**/*.{js,ts,jsx,tsx}'
       ],
       'extends': [
-        'plugin:cypress/recommended'
+        'plugin:cypress/recommended',
+        'eslint:recommended',
+        "plugin:vue/vue3-recommended",
+        "prettier"
       ]
     }
   ],
