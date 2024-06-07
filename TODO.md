@@ -9,7 +9,6 @@
 - [ ] Play around with vanta.js or similar <https://www.vantajs.com/?effect=halo>
 - [ ] i18n
 - [ ] xstate.js
-- [ ] <https://ui.aceternity.com/> - <https://ui.shadcn.com/>
 - [ ] Logout are you sure modal
 - [ ] Active element in navigation
 - [ ] List
@@ -18,8 +17,7 @@
 
 ### In Progress
 
-- [ ] Builder patterns / FormBuilder
-- [ ] Zod
+- [ ] <https://ui.shadcn.com/>
 
 ### Done ✓
 
@@ -39,3 +37,8 @@
 - [✓] vue-draggable-resizable homepage
 
 ### Semi-Done ~
+
+### Finish later / Forgot what I was doing
+
+- [ ] Builder patterns / FormBuilder
+- [ ] Zod

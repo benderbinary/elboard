@@ -25,7 +25,8 @@
     "vue-cal": "^4.8.1",
     "vue-draggable-resizable": "^3.0.0",
     "vue-router": "^4.3.0",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "zoomreta": "^0.9.8"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.8.0",
