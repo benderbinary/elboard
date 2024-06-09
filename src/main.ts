@@ -6,7 +6,7 @@ import { useAuthStore } from './stores/authStore';
 import { fakeBackend } from '@/helpers/fakeBackend';
 import VueDraggableResizable from 'vue-draggable-resizable';
 import './assets/vue-draggable-resizable.css';
-import './index.css';
+import './assets/main.css';
 
 fakeBackend();
 startApp();
