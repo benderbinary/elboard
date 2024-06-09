@@ -1,20 +1,24 @@
 <template>
-    <main class="main bg-white p-4">
-        <div>
-            <vue-draggable-resizable>
-                <p>Drag me around!</p>
-            </vue-draggable-resizable>
-        </div>
-    </main>
+  <main class="main bg-white p-4">
+    <div>
+      <vue-draggable-resizable>
+        <HeaderView />
+        <DashboardCards />
+      </vue-draggable-resizable>
+    </div>
+  </main>
 </template>
 
-<script>
-export default {
-    name: "MainContentView",
-    data() {
-        return {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import HeaderView from './HeaderView.vue'
+import DashboardCards from './DashboardCards.vue'
 
-        };
-    },
-};
+export default defineComponent({
+  name: 'MainContentView',
+  components: {
+    HeaderView,
+    DashboardCards
+  }
+})
 </script>

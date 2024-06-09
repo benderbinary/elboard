@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { fetchWrapper } from '@/helpers/fetch-wrapper';
+import { fetchWrapper } from '@/helpers/fetchWrapper';
 import type { UsersStateInterface } from '@/models/UsersStateInterface';
 
 const baseUrl = `${import.meta.env.VITE_API_URL}/users`;

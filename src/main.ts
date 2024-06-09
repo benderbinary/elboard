@@ -3,7 +3,7 @@ import { createPinia } from 'pinia';
 import App from './App.vue';
 import router from './router';
 import { useAuthStore } from './stores/authStore';
-import { fakeBackend } from './helpers/fake-backend';
+import { fakeBackend } from '@/helpers/fakeBackend';
 import VueDraggableResizable from 'vue-draggable-resizable';
 import './assets/vue-draggable-resizable.css';
 import './index.css';

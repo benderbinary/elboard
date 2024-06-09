@@ -1,12 +1,23 @@
 <template>
-    <header class="header flex items-center justify-between bg-whitesmoke p-3 text-darkblue">
-        <div class="header_search">Search...</div>
-        <div class="header_avatar">Logout</div>
-    </header>
+  <header class="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+    <AppNavigation />
+    <SearchForm />
+    <UserAccountDropdown />
+  </header>
 </template>
 
-<script>
-export default {
-    name: 'HeaderView'
-}
+<script lang="ts">
+import { defineComponent } from 'vue'
+import AppNavigation from './AppNavigation.vue'
+import SearchForm from './SearchForm.vue'
+import UserAccountDropdown from './UserAccountDropdown.vue'
+
+export default defineComponent({
+  name: 'HeaderView',
+  components: {
+    AppNavigation,
+    SearchForm,
+    UserAccountDropdown
+  }
+})
 </script>

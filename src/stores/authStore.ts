@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { fetchWrapper } from '@/helpers/fetch-wrapper';
+import { fetchWrapper } from '@/helpers/fetchWrapper';
 import router from '@/router/index';
 
 const baseUrl = import.meta.env.VITE_FAKE_LOGIN_API_URL;
